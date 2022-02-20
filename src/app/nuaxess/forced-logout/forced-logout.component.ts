@@ -21,5 +21,9 @@ export class ForcedLogoutComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  redirect() {
+    location.replace("https://mynuaxess.com/#/sign-in")
+  }
 
 }

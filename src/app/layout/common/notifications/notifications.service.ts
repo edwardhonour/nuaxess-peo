@@ -127,6 +127,9 @@ export class NotificationsService
         );
     }
 
+    goto() {
+         
+    }
     /**
      * Mark all notifications as read
      */

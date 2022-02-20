@@ -20,4 +20,8 @@ import { authSignOutRoutes } from 'app/modules/auth/sign-out/sign-out.routing';
 export class AuthSignOutModule
 {
     
+    redirect() {
+        location.replace("https://mynuaxess.com/#/sign-in")
+    }
+    
 }
