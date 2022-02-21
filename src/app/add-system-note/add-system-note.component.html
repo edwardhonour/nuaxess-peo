@@ -81,7 +81,7 @@
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
                     Add System Note
                 </h2>
-                <p>Be concise, don't use special characters if you can avoid it, and ff it's time sensitive follow up with an email.</p>
+                <p>Be concise, don't use special characters if you can avoid it, and if it's time sensitive follow up with an email.</p>
             </div>
         </div>
     </div>
@@ -130,6 +130,16 @@
                             matPrefix
                             [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
                     </mat-form-field>
+                    <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="flex-auto gt-xs:pr-3">
+                    <mat-label>Assigned To</mat-label>
+                    <mat-select  id="assigned_to" name="assigned_to" [(ngModel)]="data.formData['assigned_to']">
+                        <mat-option value="502">Joe Lehman</mat-option>
+                        <mat-option value="1">Edward Honour</mat-option>
+                    </mat-select>
+                
+                </mat-form-field>
                 </div>
                 <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700">
                     <button mat-button [routerLink]="['/sadmin']">
