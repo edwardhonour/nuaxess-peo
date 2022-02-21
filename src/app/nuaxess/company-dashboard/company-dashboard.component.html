@@ -523,7 +523,7 @@
                 </tr>
             </thead>
                     <tbody>
-    <tr *ngFor="let m of data.census | filter: term ">
+    <tr *ngFor="let m of data.census | filter: term | paginate: { currentPage: p , itemsPerPage: 50}">
         <td>
             {{ m.employee_code }}
         </td>
@@ -566,6 +566,8 @@
     </tr>
 </tbody>
 </table>
+<paging-controls (pageChange)="p = $event" [isItemsPerPage]="false"  
+class="my-pagination"></paging-controls>
 </div> <!-- table responsive -->
 </div> <!-- Card body -->
 </div> <!-- Col -->
