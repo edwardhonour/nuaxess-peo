@@ -77,6 +77,11 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
         <div class="flex-1 min-w-0">
+            <div style="margin-top: 20px !important;">
+                <a class="inline-flex items-center leading-6 text-primary hover:underline" [routerLink]="['/sadmin']"><span class="inline-flex items-center"><mat-icon role="img" class="mat-icon notranslate icon-size-5 text-current mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="arrow-sm-left" data-mat-icon-namespace="heroicons_solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
+                </svg></mat-icon><span class="ml-1.5 font-medium leading-5">Back to Admin Dashboard</span></span></a>
+            </div>
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
                     View / Edit Employee Census Data
@@ -157,15 +162,8 @@
                     </mat-form-field>                   
                 </div>
                 <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700">
-                    <button mat-button *ngIf="data.formData.source=='additions'" [routerLink]="['/current-additons',data.formData['month_id']]">
-                        Cancel
-                    </button>
-                    <button mat-button *ngIf="data.formData.source=='terminations'" [routerLink]="['/current-terminations',data.formData['month_id']]">
-                        Cancel
-                    </button>
-                    <button mat-button *ngIf="data.formData.source=='census'" [routerLink]="['/current-terminations',data.formData['month_id']]">
-                        Cancel
-                    </button>  
+                    <input type="button" value="Cancel" onclick="history.back()" mat-button>
+
                     <button
                         class="px-6 ml-3"
                         mat-flat-button
