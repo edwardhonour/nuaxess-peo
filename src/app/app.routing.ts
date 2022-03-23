@@ -29,6 +29,8 @@ import { UserLogoutComponent } from './nuaxess/user-logout/user-logout.component
 import { SystemNoteListComponent } from './system-note-list/system-note-list.component';
 import { AddSystemNoteComponent } from './add-system-note/add-system-note.component';
 import { SystemNoteDashboardComponent } from './system-note-dashboard/system-note-dashboard.component';
+import { InvoiceListComponent } from './nuaxess/invoice-list/invoice-list.component';
+import { EditClientPlanComponent } from './nuaxess/edit-client-plan/edit-client-plan.component';
 
 
 export const appRoutes: Route[] = [
@@ -89,7 +91,9 @@ export const appRoutes: Route[] = [
             {path: 'system-note-dashboard/:id', component: SystemNoteDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },          
             {path: 'member-lookup', component: MemberLookupComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'enroll/:id', component: UserEnrollComponent, resolve: { data: EnrollResolver }, },
+            {path: 'edit-client-plan/:id/:id2', component: EditClientPlanComponent, resolve:{ menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'user-settings', component: UserSettingsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'invoice-list', component: InvoiceListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'user-profile', component: UserProfileComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'enroll', component: UserEnrollComponent, resolve: { data: EnrollResolver }, }
         ]

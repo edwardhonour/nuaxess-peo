@@ -119,6 +119,9 @@ import { UserLogoutComponent } from './nuaxess/user-logout/user-logout.component
 import { SystemNoteListComponent } from './system-note-list/system-note-list.component';
 import { AddSystemNoteComponent } from './add-system-note/add-system-note.component';
 import { SystemNoteDashboardComponent } from './system-note-dashboard/system-note-dashboard.component';
+import { InvoiceListComponent } from './nuaxess/invoice-list/invoice-list.component';
+import { EditPlanComponent } from './nuaxess/edit-plan/edit-plan.component';
+import { EditClientPlanComponent } from './nuaxess/edit-client-plan/edit-client-plan.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -153,7 +156,10 @@ const routerConfig: ExtraOptions = {
         UserLogoutComponent,
         SystemNoteListComponent,
         AddSystemNoteComponent,
-        SystemNoteDashboardComponent
+        SystemNoteDashboardComponent,
+        InvoiceListComponent,
+        EditPlanComponent,
+        EditClientPlanComponent
     ],
     imports     : [
         BrowserModule,

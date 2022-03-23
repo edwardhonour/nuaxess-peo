@@ -9,6 +9,7 @@ import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/co
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { DataService } from 'app/data.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -22,6 +23,7 @@ import { DataService } from 'app/data.service';
     term: any;
     p: any;
     q: any;
+    inactive: any;
 
       chartGithubIssues: ApexOptions = {};
       chartTaskDistribution: ApexOptions = {};
@@ -60,6 +62,7 @@ import { DataService } from 'app/data.service';
        */
       ngOnInit(): void
       {      
+        this.inactive='N';
               this._activatedRoute.data.subscribe(({ 
                 data, menudata, userdata })=> { 
                 this.data=data;
@@ -176,6 +179,14 @@ import { DataService } from 'app/data.service';
       //------------------------------
       // Upload Form
       //------------------------------
+
+      showInactive() {
+        if (this.inactive=='Y') {
+          this.inactive='N';
+        } else {
+          this.inactive='Y';
+        }
+      }
 
       file=new FormControl('')
       file_data:any=''

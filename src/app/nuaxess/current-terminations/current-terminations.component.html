@@ -79,7 +79,7 @@
         <div class="flex-1 min-w-0">
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    Terminations effective {{ data.month_id }}
+                    Terminations beginning {{ data.month_id }}
                 </h2>
                 <p>Note: Enrollement counts updated nightly.</p>
             </div>
@@ -131,7 +131,8 @@
                                 <th>Employee ID</th>
                                 <th>Name</th>
                                 <th>Company</th>
-                                <th>Dates</th>
+                                <th>Eff Date</th>
+                                <th>Term Date</th>
                                 <th>Plan</th>
                                 <th>Coverage Level</th>
                                 <th>Price</th>
@@ -143,6 +144,7 @@
                                 <td>{{ m.employee_code }}<br>{{ m.dependent_code }}</td>
                                 <td>{{ m.last_name }}, {{ m.first_name }} {{ m.middle_initial }}</td>
                                 <td>{{ m.company_name }} ({{ m.client_id }})</td>
+                                <td>{{ m.eff_dt }}</td>
                                 <td>{{ m.term_dt }}</td>
                                 <td>{{ m.client_plan }}</td>
                                 <td>{{ m.coverage_level }}</td>

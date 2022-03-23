@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { ApexOptions } from 'ng-apexcharts';
+import { ApexOptions, ApexYAxis } from 'ng-apexcharts';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 import { Navigation } from 'app/core/navigation/navigation.types';
@@ -20,7 +20,7 @@ import { NgLocalization } from '@angular/common';
 export class CompanyDashboardComponent implements OnInit, OnDestroy {
   navigation: Navigation;
   isScreenSmall: boolean;
-  term: any;
+  //term: any;
   p: any;
   formFieldHelpers: string[] = [''];
 
@@ -35,6 +35,8 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     adding: any;
     addcont: any;
     employee_name: any;
+    adjust: any;
+    editAdjust: any;
     dob: any;
     editQQ: any;
     uploading: any;
@@ -43,6 +45,13 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     inactive: any;
     active: any;
     history: any;
+    plans:any;
+    move: any;
+    term: any;
+    bad: any;
+    docs: any;
+    comp: any;
+
     /**
      * Constructor
      */
@@ -66,6 +75,57 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     }
   }
   
+  showMove() {
+    if (this.move=='Y') {
+       this.move='N';
+    } else {
+      this.move='Y'
+    }
+  }
+
+  showDocs() {
+    if (this.docs=='Y') {
+       this.docs='N';
+    } else {
+      this.docs='Y'
+    }
+  }
+
+  showComp() {
+    if (this.comp=='Y') {
+       this.comp='N';
+    } else {
+      this.comp='Y'
+    }
+  }
+
+  showPlans() {
+    if (this.plans=='Y') {
+       this.plans='N';
+    } else {
+      this.plans='Y'
+    }
+  }
+
+  showAdjustments() {
+    if (this.adjust=='Y') {
+       this.adjust='N';
+    } else {
+      this.adjust='Y'
+    }
+  }
+
+  showEditAdjustments() {
+    if (this.editAdjust=='Y') {
+       this.editAdjust='N';
+       this.data.adjustData['id']="";
+       this.data.adjustData['description']="";
+       this.data.adjustData['amount']="";
+    } else {
+        this.editAdjust='Y';
+    }
+  }
+
     ngOnInit(): void
     {   
       this.dsc='';
@@ -75,9 +135,17 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       this.inactive='N';
       this.active='N';
       this.history='N';
+      this.plans='N';
+      this.move='N';
+      this.adjust='N';
+      this.editAdjust='N';
+      this.docs='N';
+      this.comp='N';
+
       this._activatedRoute.data.subscribe(({ 
         data, menudata, userdata })=> { 
           this.data=data;
+          console.log(this.data.formData3)
           this.user=userdata;
           if (this.data.user.force_logout>0) {
             localStorage.removeItem('uid');
@@ -192,6 +260,42 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       }
     }
 
+    editEmployee(m) {
+      if (this.adding=='N') {
+        this.adding='Y';
+        console.log(m);
+        this.data.employeeData['id']=m.id;
+        this.data.employeeData['first_name']=m.first_name;
+        this.data.employeeData['middle_name']=m.middle_name;
+        this.data.employeeData['last_name']=m.last_name;
+        this.data.employeeData['suffix']=m.suffix;
+        this.data.employeeData['email']=m.email;
+        this.data.employeeData['phone_mobile']=m.phone_mobile;
+        this.data.employeeData['social_security_number']=m.ssn;
+        this.data.employeeData['date_of_birth']=m.dob;
+        this.data.employeeData['gender']=m.gender;
+        this.data.employeeData['medical_plan_code']=m.medical_plan_code;
+        this.data.employeeData['medical_coverage_level']=m.medical_coverage_level;
+        this.data.employeeData['eff_dt']=m.eff_dt;
+        this.data.employeeData['dental_plan_code']=m.dental_plan_code;
+        this.data.employeeData['dental_coverage_level']=m.dental_coverage_level;
+        this.data.employeeData['vision_plan_code']=m.vision_plan_code;
+        this.data.employeeData['vision_coverage_level']=m.vision_coverage_level;
+      } else {
+        this.adding='N';
+        this.data.employeeData['id']="";
+        this.data.employeeData['first_name']="";
+        this.data.employeeData['middle_name']="";
+        this.data.employeeData['last_name']="";
+        this.data.employeeData['suffix']="";
+        this.data.employeeData['email']="";
+        this.data.employeeData['phone_mobile']="";
+        this.data.employeeData['social_security_number']="";
+        this.data.employeeData['date_of_birth']="";
+        this.data.employeeData['gender']="";
+      }
+    }
+
     addLevel() {
       if (this.addcont=='N') {
         this.data.formData2['id']="";
@@ -228,6 +332,13 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         this.adding='Y';
     }
 
+    editAdjustments(m: any) {
+      this.data.adjustData['id']=m.id;
+      this.data.adjustData['description']=m.description;
+      this.data.adjustData['amount']=m.amount;
+      this.editAdjust='Y';
+    }
+
     editBlur(id: any) {
       this.data.colForm['message_'+id]="";
     }
@@ -246,6 +357,8 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
 
     }
 
+
+
     postForm() {
         this._dataService.postForm("post-add-employee-small", this.data['formData']).subscribe((data:any)=>{
           if (data.error_code=="0") {
@@ -255,6 +368,49 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
           }
         });
       }
+
+      postAdjustment() {
+        this._dataService.postForm("post-adjustment", this.data['adjustData']).subscribe((data:any)=>{
+          if (data.error_code=="0") {
+            location.reload();
+          } else {     
+//            this.error=data.error_message
+          }
+        });
+      }
+
+      deleteAdjustment() {
+        if (confirm('Are you sure you want to delete this adjustment?')) {
+          this._dataService.postForm("delete-adjustment", this.data['adjustData']).subscribe((data:any)=>{
+            if (data.error_code=="0") {
+              location.reload();
+            } else {     
+  //            this.error=data.error_message
+            }
+          });
+        }
+      }
+
+      addDental() {
+        window.open(
+          "https://myna-api.com/api/makedental.php?id="+this.data.id, "_blank");
+      }
+  
+      addEmployeeDental(m: any) {
+        window.open(
+          "https://myna-api.com/api/add_employee_vision.php?id="+m, "_blank");
+      }
+
+      addEmployeeVision(m: any) {
+        window.open(
+          "https://myna-api.com/api/add_employee_dental.php?id="+m, "_blank");
+      }
+
+      printPDF() {
+        window.open(
+          "https://myna-api.com/api/inf1.php?id="+this.data.id, "_blank");
+      }
+
 
       activatePlan(id:any, client_plan: any) {
 
@@ -298,14 +454,44 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
         });
       }
 
+    showTerm(m: any) {
+        m.term="Y";
+    }
+
+    showBad(m: any) {
+      m.move="Y";
+     }
+
+
     postEmployee() {
-      this._dataService.postForm("post-add-employee-small", this.data).subscribe((data:any)=>{
+      let ok='Y';
+      if (this.data['employeeData']['first_name']=='' ) {
+        ok='N';
+      }
+      if (this.data['employeeData']['last_name']=='' ) {
+        ok='N';
+      }
+      if (this.data['employeeData']['date_of_birth']=='' ) {
+        ok='N';
+      }
+      if (this.data['employeeData']['gender']=='' ) {
+        ok='N';
+      }
+      if (this.data['employeeData']['eff_dt']=='' ) {
+        ok='N';
+      }
+
+      if (ok=='Y') {
+      this._dataService.postForm("post-add-employee-census", this.data['employeeData']).subscribe((data:any)=>{
         if (data.error_code=="0") {
           location.reload();
         } else {     
 //            this.error=data.error_message
         }
       });
+      } else {
+        alert('Mandatory Fields are missing')
+      }
     }
 
   editE(id: any,first_name: any, middle_name: any, last_name: any, suffix: any, email: any, phone_mobile: any, date_of_birth: any, social_security_number: any, gender: any) {
@@ -352,12 +538,79 @@ if (this.inactive=='Y') {
 }
 }
 
+
 showActive() {
   if (this.active=='Y') {
      this.active='N';
   } else {
     this.active='Y'
   }
+}
+
+postMove(id: any) {
+  if (confirm('Are you sure you want to move this member to this company?')) { 
+  this.data['moveData']['census_id']=id;
+  this._dataService.postForm("post-census-move", this.data['moveData']).subscribe((data:any)=>{
+    if (data.error_code=="0") {
+      location.reload();
+    } else {     
+//            this.error=data.error_message
+    }
+  });
+}
+}
+
+updateCensus() {
+  if (confirm('Are you sure you want to update member census with additions and terminations from last month?')) {
+    this.data['moveData']['term_dt']=this.data.month_id;
+  this._dataService.postForm("post-forward-census", this.data['moveData']).subscribe((data:any)=>{
+    if (data.error_code=="0") {
+      location.reload();
+    } else {     
+//            this.error=data.error_message
+    }
+  });
+}
+}
+
+postBad(id: any) {
+  this.data['badData']['employee_id']=id;
+  this._dataService.postForm("post-census-bad", this.data['badData']).subscribe((data:any)=>{
+    if (data.error_code=="0") {
+      location.reload();
+    } else {     
+//            this.error=data.error_message
+    }
+  });
+}
+
+priceFix(id: any) {
+  if (confirm('Are you sure you want to update this client price?')) {
+
+
+  this.data['moveData']['census_id']=id;
+  this._dataService.postForm("fix-employee-price", this.data['moveData']).subscribe((data:any)=>{
+    if (data.error_code=="0") {
+      location.reload();
+    } else {     
+       alert('APA Plan not found')
+    }
+  });
+}
+}
+
+postTerm(id: any) {
+  if (confirm('Are you sure you want to terminate this plan?')) {
+
+  this.data['moveData']['census_id']=id;
+  this._dataService.postForm("post-employee-term", this.data['moveData']).subscribe((data:any)=>{
+    if (data.error_code=="0") {
+      location.reload();
+    } else {     
+       alert('APA Plan not found')
+    }
+  });
+}
 }
 
     postForm2() {
@@ -369,6 +622,17 @@ showActive() {
           }
         });
       }
+
+      postForm3() {
+        this._dataService.postForm("post-add-client-plan", this.data['formData3']).subscribe((data:any)=>{
+          if (data.error_code=="0") {
+            location.reload();
+          } else {     
+//            this.error=data.error_message
+          }
+        });
+      }
+
 
       //------------------------------
       // Upload Form
