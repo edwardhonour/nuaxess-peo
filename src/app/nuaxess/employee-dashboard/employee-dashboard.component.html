@@ -447,6 +447,9 @@
                         Relationship
                     </th>
                     <th>
+                        SSN
+                    </th>                    
+                    <th>
                         Date of Birth
                     </th>
                 </tr>
@@ -463,8 +466,11 @@
             {{ m.gender }}
         </td>
         <td>
-            {{ m.relation_to_insured }}
+            {{ m.relation }}
         </td>
+        <td>
+            {{ m.social_security_number }}
+        </td>        
         <td>
             {{ m.date_of_birth }}
         </td>
